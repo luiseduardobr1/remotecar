@@ -12,7 +12,7 @@ Como o nome já deixa claro, o projeto consiste na implementação prática de u
 Para o controle de velocidade, será ajustado por um tempo de *delay* entre os acionamentos de cada bobina do motor respeitando o limite do mesmo, assim, permitindo realizar curvas adequadamente. Apesar da limitação de velocidade dos motores de passo, eles são importantes em aplicações que exigem precisão por isso o interesse em sua utilização. 
 
 # Equipamentos Utilizados
-1x ARM Cortex-M0
-1x HC-06
-1x ULN2803
+1x ARM Cortex-M0 \
+1x HC-06 \
+1x ULN2803 \
 2x Motores de passo de 12V
