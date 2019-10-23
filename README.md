@@ -12,7 +12,7 @@ Como o nome já deixa claro, o projeto consiste na implementação prática de u
 \
 Para o controle da velocidade, será ajustado um tempo de *delay* entre os acionamentos de cada bobina do motor, respeitando o limite do mesmo. Para nossa aplicação, a precisão dos movimentos é mais importante e por isso o interesse na utilização dos motores de passo uma vez que para velocidades maiores seria mais oportuno a utilização de motores DC. \
 \
-Além disso, utiliza-se o CI [ULN2803](http://www.ti.com/lit/ds/symlink/uln2803a.pdf) que atua como uma (configuração de Darlington)[https://en.wikipedia.org/wiki/Darlington_transistor] dando um ganho na corrente de entrada de modo a ser capaz de movimentar o eixo do motor. 
+Além disso, utiliza-se o CI [ULN2803](http://www.ti.com/lit/ds/symlink/uln2803a.pdf) que atua como uma [configuração de Darlington](https://en.wikipedia.org/wiki/Darlington_transistor) dando um ganho na corrente de entrada de modo a ser capaz de movimentar o eixo do motor. 
 
 # Equipamentos Utilizados
 1x ARM Cortex-M0 \
