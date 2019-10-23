@@ -32,5 +32,7 @@ A1,B1, A2, B2, \A1, \B1, \A2, \B2 consistem nas entradas para a sequência de en
 
 # Lógica
 **Ir para frente**\
-Ambas as rodas devem girar em sentidos opostos para isso, considerando a energização das bobinas por passo pleno, deve-se energizar na seguinte ordem:\
-Motor 1:\
+Ambas as rodas devem girar em sentidos opostos. para isso, considerando a energização das bobinas por passo pleno, deve-se energizar na seguinte ordem:\
+![image](https://user-images.githubusercontent.com/56649205/67430929-a22b1c80-f5b9-11e9-957c-3aa91bd2f138.png)
+\
+**Ré**
