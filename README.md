@@ -28,5 +28,4 @@ A1,B1, A2, B2, \A1, \B1, \A2, \B2 consistem nas entradas para a sequência de en
 
 ![pinagem-enviar](https://user-images.githubusercontent.com/56649205/67429677-0ac4ca00-f5b7-11e9-8249-ad337fdbcdf3.jpg)
 
-
-
+![pinagem-uln](https://user-images.githubusercontent.com/56649205/67430034-cbe34400-f5b7-11e9-9ed2-30522354549f.PNG)
