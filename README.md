@@ -21,4 +21,5 @@ Além disso, utiliza-se o CI [ULN2803](http://www.ti.com/lit/ds/symlink/uln2803a
 2x Motores de passo de 12V
 
 # Diagrama de Blocos
-[modelo.pdf](https://github.com/luiseduardobr1/remotecar/files/3764113/modelo.pdf)
+![modelo](https://user-images.githubusercontent.com/56649205/67427909-7311ac80-f5b3-11e9-8e2c-abb0defb1b24.png)
+
