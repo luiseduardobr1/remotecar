@@ -21,4 +21,3 @@ Além disso, utiliza-se o CI [ULN2803](http://www.ti.com/lit/ds/symlink/uln2803a
 2x Motores de passo de 12V
 
 # Diagrama de Blocos
-
