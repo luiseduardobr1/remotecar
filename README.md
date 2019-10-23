@@ -23,3 +23,10 @@ Além disso, utiliza-se o CI [ULN2803](http://www.ti.com/lit/ds/symlink/uln2803a
 # Diagrama de Blocos
 ![modelo](https://user-images.githubusercontent.com/56649205/67427909-7311ac80-f5b3-11e9-8e2c-abb0defb1b24.png)
 
+# Pinagem
+A1,B1, A2, B2, \A1, \B1, \A2, \B2 consistem nas entradas para a sequência de energização das bobinas, como mostrado nas figuras a seguir.
+
+![pinagem-enviar](https://user-images.githubusercontent.com/56649205/67429677-0ac4ca00-f5b7-11e9-8249-ad337fdbcdf3.jpg)
+
+
+
