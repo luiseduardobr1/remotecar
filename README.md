@@ -31,8 +31,6 @@ A1,B1, A2, B2, \A1, \B1, \A2, \B2 consistem nas entradas para a sequência de en
 ![pinagem-uln](https://user-images.githubusercontent.com/56649205/67430034-cbe34400-f5b7-11e9-9ed2-30522354549f.PNG)
 
 # Lógica
-**Ir para frente**
+**Ir para frente**\
 Ambas as rodas devem girar em sentidos opostos para isso, considerando a energização das bobinas por passo pleno, deve-se energizar na seguinte ordem:\
 Motor 1:\
-A1 e B1 = 1 \
-(delay)
