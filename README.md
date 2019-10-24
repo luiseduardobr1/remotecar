@@ -37,4 +37,7 @@ Ambas as rodas devem girar em sentidos opostos. para isso, considerando a energi
 \
 **Ré**\
 Mesma ideia de ir para frente invertendo o sentido de ambas as rodas. Para isso, basta utilizar a sequência do motor 2 no motor 1 e vice-versa. \
-**Virar a direita**\
+**Virar à direita**\
+Ambas as rodas obedecem a mesma lógica de ir para frente o que muda é que a roda direita terá sua velocidade reduzida. Para isso, aumenta-se o intervalo entre as energizações das bobinas deste motor de passo. \
+**Virar à esquerda**\
+Ambas as rodas obedecem a mesma lógica de ir para frente o que muda é que a roda esquerda terá sua velocidade reduzida. Para isso, aumenta-se o intervalo entre as energizações das bobinas deste motor de passo.
