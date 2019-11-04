@@ -32,15 +32,23 @@ A1,B1, A2, B2, \A1, \B1, \A2, \B2 consistem nas entradas para a sequência de en
 
 # Lógica
 **Ir para frente**\
-Ambas as rodas devem girar em sentidos opostos. para isso, considerando a energização das bobinas por passo pleno, deve-se energizar na seguinte ordem:\
+Ambas as rodas devem girar em sentidos opostos:\
+Roda Direita: ANTI-HORÁRIO
+Roda Esquerda: HORÁRIO
+\
+Para isso, considerando a energização das bobinas por passo pleno, deve-se energizar na seguinte ordem:\
 ![image](https://user-images.githubusercontent.com/56649205/67430929-a22b1c80-f5b9-11e9-957c-3aa91bd2f138.png)
 \
 \
 **Ré**\
-Mesma ideia de ir para frente invertendo o sentido de ambas as rodas. Para isso, basta utilizar a sequência do motor 2 no motor 1 e vice-versa. \
+Ambas as rodas devem girar em sentidos opostos:\
+Roda Direita: HORÁRIO
+Roda Esquerda: ANTI-HORÁRIO
+\
+Para isso, basta utilizar a sequência do motor 2 no motor 1 e vice-versa. \
 \
 **Virar à direita**\
-Ambas as rodas obedecem a mesma lógica de ir para frente o que muda é que a roda direita terá sua velocidade reduzida. Para isso, aumenta-se o intervalo entre as energizações das bobinas deste motor de passo. \
+Ambas as rodas obedecem a mesma lógica de ir para frente o que muda é que a roda direita terá sua velocidade reduzida. Para isso, aumenta-se o intervalo entre as energizações das bobinas deste motor de passo sendo um três vezes o intervalo da outra. \
 \
 **Virar à esquerda**\
-Ambas as rodas obedecem a mesma lógica de ir para frente o que muda é que a roda esquerda terá sua velocidade reduzida. Para isso, aumenta-se o intervalo entre as energizações das bobinas deste motor de passo.
+Ambas as rodas obedecem a mesma lógica de ir para frente o que muda é que a roda esquerda terá sua velocidade reduzida. Para isso, aumenta-se o intervalo entre as energizações das bobinas deste motor de passo analogamente ao outro sentido.
