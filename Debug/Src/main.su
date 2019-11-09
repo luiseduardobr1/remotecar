@@ -1,0 +1,12 @@
+main.c:66:6:delay	8	static
+main.c:72:6:pinMode	64	static
+main.c:113:6:digitalWrite	8	static
+main.c:127:5:digitalRead	8	static
+main.c:135:6:rodaD	8	static
+main.c:161:6:frente	8	static
+main.c:203:6:tras	8	static
+main.c:243:6:virarD	8	static
+main.c:274:6:virarE	8	static
+main.c:411:6:SystemClock_Config	96	static
+main.c:307:5:main	32	static
+main.c:503:6:Error_Handler	0	static
