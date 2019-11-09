@@ -132,6 +132,31 @@ int digitalRead(int pino)
 	return(bit_lido);
 }
 
+void rodaD(int intervalo)
+{
+	//Começa com todas as bobinas desenergizadas
+	digitalWrite(2,0);
+	digitalWrite(3,0);
+	digitalWrite(6,0);
+	digitalWrite(7,0);
+		//Pinos 2 - 7
+		digitalWrite(2,1);
+		digitalWrite(7,1);
+		delay(intervalo);
+		//Pinos 7 - 6
+		digitalWrite(2,0);
+		digitalWrite(6,1);
+		delay(intervalo);
+		//Pinos 6 - 3
+		digitalWrite(7,0);
+		digitalWrite(3,1);
+		delay(intervalo);
+		//Pinos 3 - 2
+		digitalWrite(6,0);
+		digitalWrite(2,1);
+		delay(intervalo);
+}
+
 
 void frente(int intervalo)
 {
@@ -171,6 +196,7 @@ digitalWrite(2,1);
 digitalWrite(12,0);
 digitalWrite(10,1);
 delay(intervalo);
+
 
 }
 
@@ -301,6 +327,7 @@ int main(void)
   //Configurando os pinos - output
   //roda direita - pinos 2, 3, 6 e 7
   pinMode(2,0);
+  pinMode(17,0);
   pinMode(3,0);
   pinMode(6,0);
   pinMode(7,0);
@@ -310,34 +337,49 @@ int main(void)
   pinMode(12,0);
   pinMode(13,0);
   pinMode(18,0);
-
-  //digitalWrite(2,1);
+  pinMode(14,0);
 
 
   while (1)
   {
-	  HAL_UART_Receive(&huart1, p2, 1, HAL_MAX_DELAY);
+	  HAL_UART_Receive(&huart1, p2, 1, 10);
 	  valor = *p2;
 	  if (valor=='1')
 	  {
-			frente(1000);
+		  for (int i=0;i<=25;i++)
+		  {
+			 //rodaD(5);
+			  frente(1);
+		  }
 	  }
 	  if (valor=='2')
 	  {
-		  virarD(1000);
+		  for (int i=0;i<=25;i++)
+				  {
+					 //rodaD(5);
+					  virarD(1);
+				  }
 	  }
 	  if (valor=='3')
 	  {
-		  tras(1000);
+		  for (int i=0;i<=25;i++)
+				  {
+					 //rodaD(5);
+					  tras(1);
+				  }
 	  }
 	  if (valor=='4')
 	  {
-		  virarE(1000);
+		  for (int i=0;i<=25;i++)
+				  {
+					 //rodaD(5);
+					  virarE(1);
+				  }
 	  }
 	  if (valor=='6')
 	  {
 		  digitalWrite(18,1);
-		  delay(1000);
+		  delay(500);
 		  digitalWrite(18,0);
 	  }
 	  if (valor=='5')
@@ -462,7 +504,6 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-
   /* USER CODE END Error_Handler_Debug */
 }
 
