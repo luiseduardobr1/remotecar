@@ -252,19 +252,22 @@ digitalWrite(11,0);
 digitalWrite(12,0);
 digitalWrite(13,0);
 
-//Pino 10 - 11
+//Pino 10 - 13
 digitalWrite(10,1);
-digitalWrite(11,1);
+digitalWrite(13,1);
 delay(intervalo);
-//Pino 11 - 12
+
+//Pinos 13-12
 digitalWrite(10,0);
 digitalWrite(12,1);
 delay(intervalo);
-//Pino 12 - 13
-digitalWrite(11,0);
-digitalWrite(13,1);
+
+//Pinos 12-11
+digitalWrite(13,0);
+digitalWrite(11,1);
 delay(intervalo);
-//Pino 13 - 10
+
+//Pinos 11-10
 digitalWrite(12,0);
 digitalWrite(10,1);
 delay(intervalo);
@@ -283,25 +286,27 @@ digitalWrite(11,0);
 digitalWrite(12,0);
 digitalWrite(13,0);
 
-//Pinos 2 - 7
+//Pinos 2, 3, 10, 13
 digitalWrite(2,1);
-digitalWrite(7,1);
+digitalWrite(3,1);
 delay(intervalo);
-//Pinos 7 - 6
+
+//Pinos 3, 6, 13, 12
 digitalWrite(2,0);
 digitalWrite(6,1);
 delay(intervalo);
-//Pinos 6 - 3
-digitalWrite(7,0);
-digitalWrite(3,1);
+
+//Pinos 6, 7, 12, 11
+digitalWrite(3,0);
+digitalWrite(7,1);
 delay(intervalo);
-//Pinos 3 - 2
+
+//Pinos 7, 2, 11, 10
 digitalWrite(6,0);
 digitalWrite(2,1);
 delay(intervalo);
 
 }
-
 
 /* Private user code ---------------------------------------------------------*/
 int main(void)
@@ -323,6 +328,7 @@ int main(void)
   unsigned char *p2;
   p2=&comando;
   int bitlido;
+  int precisao;
 
   //Configurando os pinos - output
   //roda direita - pinos 2, 3, 6 e 7
@@ -339,48 +345,45 @@ int main(void)
   pinMode(18,0);
   pinMode(14,0);
 
-
+precisao=25;
   while (1)
   {
 	  HAL_UART_Receive(&huart1, p2, 1, 10);
 	  valor = *p2;
 	  if (valor=='1')
 	  {
-		  for (int i=0;i<=25;i++)
-		  {
+
+		  //frente(5);
+		  tras(5);
+		 // for (int i=0;i<=precisao;i++)
+		  //{
 			 //rodaD(5);
-			  frente(1);
-		  }
+		//	  frente(1);
+		 // }
 	  }
 	  if (valor=='2')
 	  {
-		  for (int i=0;i<=25;i++)
-				  {
+		 // for (int i=0;i<=precisao;i++)
+			//	  {
 					 //rodaD(5);
-					  virarD(1);
-				  }
+					  virarD(5);
+				//  }
 	  }
 	  if (valor=='3')
 	  {
-		  for (int i=0;i<=25;i++)
-				  {
+		  //for (int i=0;i<=precisao;i++)
+				  //{
 					 //rodaD(5);
-					  tras(1);
-				  }
+					  frente(5);
+				  //}
 	  }
 	  if (valor=='4')
 	  {
-		  for (int i=0;i<=25;i++)
-				  {
+		 // for (int i=0;i<=precisao;i++)
+			//	  {
 					 //rodaD(5);
-					  virarE(1);
-				  }
-	  }
-	  if (valor=='6')
-	  {
-		  digitalWrite(18,1);
-		  delay(500);
-		  digitalWrite(18,0);
+					  virarE(5);
+				  //}
 	  }
 	  if (valor=='5')
 	  {
@@ -393,6 +396,12 @@ int main(void)
 			digitalWrite(12,0);
 			digitalWrite(13,0);
 			digitalWrite(18,0);
+	  }
+	  if (valor=='6')
+	  {
+		  digitalWrite(18,1);
+		  delay(500);
+		  digitalWrite(18,0);
 	  }
 
 	  //if (*p2=='1')
