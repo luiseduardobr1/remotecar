@@ -35,43 +35,52 @@ static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
+// Modo de operação do pino
 int modo_do_pino;
-	//Equivalência de pinos
-	unsigned int equivalencia [21][2]={
-	{0,0}, //pino 0
-	{0,0}, // pino 1
-	{GPIOF,GPIO_PIN_0}, //pino 2
-	{GPIOF,GPIO_PIN_1}, //pino 3
-	{0,0}, //pino 4
-	{0,0}, //pino 5
-	{GPIOA,GPIO_PIN_0}, //pino 6
-	{GPIOA,GPIO_PIN_1}, //pino 7
-	{GPIOA,GPIO_PIN_2}, //pino 8
-	{GPIOA,GPIO_PIN_3}, //pino 9
-	{GPIOA,GPIO_PIN_4}, //pino 10
-	{GPIOA,GPIO_PIN_5}, //pino 11
-	{GPIOA,GPIO_PIN_6}, //pino 12
-	{GPIOA,GPIO_PIN_7}, //pino 13
-	{GPIOB,GPIO_PIN_1}, //pino 14
-	{0,0}, //pino 15
-	{0,0}, //pino 16
-	{GPIOA,GPIO_PIN_9}, //pino 17
-	{GPIOA,GPIO_PIN_10}, //pino 18
-	{0,0}, //pino 19
-	{0,0}, //pino 20
-	};
-	GPIO_TypeDef *p1;
+	
+// Equivalência de pinos
+unsigned int equivalencia [21][2]={
+	{0, 0},                // Pino 0
+	{0, 0},                // Pino 1
+	{GPIOF, GPIO_PIN_0},   // Pino 2
+	{GPIOF, GPIO_PIN_1},   // Pino 3
+	{0, 0},                // Pino 4
+	{0, 0},                // Pino 5
+	{GPIOA, GPIO_PIN_0},   // Pino 6
+	{GPIOA, GPIO_PIN_1},   // Pino 7
+	{GPIOA, GPIO_PIN_2},   // Pino 8
+	{GPIOA, GPIO_PIN_3},   // Pino 9
+	{GPIOA, GPIO_PIN_4},   // Pino 10
+	{GPIOA, GPIO_PIN_5},   // Pino 11
+	{GPIOA, GPIO_PIN_6},   // Pino 12
+	{GPIOA, GPIO_PIN_7},   // Pino 13
+	{GPIOB, GPIO_PIN_1},   // Pino 14
+	{0,0},                 // Pino 15
+	{0,0},                 // Pino 16
+	{GPIOA, GPIO_PIN_9},   // Pino 17
+	{GPIOA, GPIO_PIN_10},  // Pino 18
+	{0,0},                 // Pino 19
+	{0,0},                 // Pino 20
+};
 
-//Função de delay em milisegundos
-void delay(unsigned long ms)
-{
+
+GPIO_TypeDef *p1;
+
+
+// Função de delay em milisegundos
+void delay(unsigned long ms) {
 	HAL_Delay(ms);
 }
 
-//0 = output, 1 = input, 2 = input com pullup
-void pinMode(int pino, int modo)
-{
 
+/**
+ * @brief Define modos de operação para os pinos.
+ * 
+ * @param pino Número do pino
+ * @param modo Modo de operação: 0 - output; 1 - input; 2 - input com resistor de pull-up
+ */
+void pinMode(int pino, int modo) 
+{
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
 	p1 = (GPIO_TypeDef *)equivalencia[pino][0];
 
@@ -80,7 +89,7 @@ void pinMode(int pino, int modo)
 	__HAL_RCC_GPIOB_CLK_ENABLE();
 	__HAL_RCC_GPIOF_CLK_ENABLE();
 
-	if (modo == 0)
+	if (modo == 0) 
 	{
 		HAL_GPIO_WritePin(p1, equivalencia[pino][1], GPIO_PIN_RESET);
 		GPIO_InitStruct.Pin = equivalencia[pino][1];
@@ -88,225 +97,248 @@ void pinMode(int pino, int modo)
 		GPIO_InitStruct.Pull = GPIO_NOPULL;
 		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 		HAL_GPIO_Init(p1, &GPIO_InitStruct);
-		modo_do_pino=0;
+		modo_do_pino = 0;
 	}
 
-	if (modo == 1)
-		{
-		  GPIO_InitStruct.Pin = equivalencia[pino][1];
-		  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-		  GPIO_InitStruct.Pull = GPIO_NOPULL;
-		  HAL_GPIO_Init(p1, &GPIO_InitStruct);
-		  modo_do_pino=1;
-		}
-	if (modo == 2)
-			{
-			  GPIO_InitStruct.Pin = equivalencia[pino][1];
-			  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-			  GPIO_InitStruct.Pull = GPIO_PULLUP;
-			  HAL_GPIO_Init(p1, &GPIO_InitStruct);
-			  modo_do_pino=2;
-			}
+	if (modo == 1) 
+	{
+		GPIO_InitStruct.Pin = equivalencia[pino][1];
+		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+		GPIO_InitStruct.Pull = GPIO_NOPULL;
+		HAL_GPIO_Init(p1, &GPIO_InitStruct);
+		modo_do_pino = 1;
+	}
+
+	if (modo == 2) 
+	{
+		GPIO_InitStruct.Pin = equivalencia[pino][1];
+		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+		GPIO_InitStruct.Pull = GPIO_PULLUP;
+		HAL_GPIO_Init(p1, &GPIO_InitStruct);
+		modo_do_pino = 2;
+	}
 }
 
 
-void digitalWrite(int pino, int valor)
+/**
+ * @brief Obtém o valor lógico do pino fornecido
+ * 
+ * @param pino Número do pino
+ * 
+ * @returns Valor lógico: 0 (LOW) ou 1 (HIGH)
+ */
+int digitalRead(int pino) 
+{
+	int bit_lido;
+
+	p1 = (GPIO_TypeDef *)equivalencia[pino][0];
+
+	bit_lido = HAL_GPIO_ReadPin(p1, equivalencia[pino][1]);
+
+	return bit_lido;
+}
+
+
+/**
+ * @brief Escreve o valor lógico no pino fornecido
+ * 
+ * @param pino Número do pino
+ * @param valor Valor lógico: 0 (LOW) ou 1 (HIGH)
+ */
+void digitalWrite(int pino, int valor) 
 {
 	p1 = (GPIO_TypeDef *)equivalencia[pino][0];
-	if (valor == 1)
-	{
+
+	if (valor == 1) {
 		p1->BSRR |= equivalencia[pino][1];
 	}
-	else
-	{
+	else {
 		p1->BRR |= equivalencia[pino][1];
 	}
 }
 
-//Lê o nível lógico do bit
-int digitalRead(int pino)
-{
-	int bit_lido;
-	p1 = (GPIO_TypeDef *)equivalencia[pino][0];
-	bit_lido=HAL_GPIO_ReadPin(p1, equivalencia[pino][1]);
-	return(bit_lido);
-}
 
-void rodaD(int intervalo)
+/**
+ * @brief Reseta os pinos para desenergizar as bobinas (parar os motores)
+ */
+void desativar() 
 {
-	//Começa com todas as bobinas desenergizadas
-	digitalWrite(2,0);
-	digitalWrite(3,0);
-	digitalWrite(6,0);
-	digitalWrite(7,0);
-		//Pinos 2 - 7
-		digitalWrite(2,1);
-		digitalWrite(7,1);
-		delay(intervalo);
-		//Pinos 7 - 6
-		digitalWrite(2,0);
-		digitalWrite(6,1);
-		delay(intervalo);
-		//Pinos 6 - 3
-		digitalWrite(7,0);
-		digitalWrite(3,1);
-		delay(intervalo);
-		//Pinos 3 - 2
-		digitalWrite(6,0);
-		digitalWrite(2,1);
-		delay(intervalo);
+	digitalWrite(2, 0);
+	digitalWrite(3, 0);
+	digitalWrite(6, 0);
+	digitalWrite(7, 0);
+	digitalWrite(10,0);
+	digitalWrite(11, 0);
+	digitalWrite(12, 0);
+	digitalWrite(13, 0);
 }
 
 
-void frente(int intervalo)
+/**
+ * @brief Define os pinos de modo a mover o carro para a frente
+ * 
+ * @param intervalo Valor definido para o delay de transição para a nova configuração de 
+ * energização das bobinas
+ */
+void frente(int intervalo) 
 {
-digitalWrite(2,0);
-digitalWrite(3,0);
-digitalWrite(6,0);
-digitalWrite(7,0);
-digitalWrite(10,0);
-digitalWrite(11,0);
-digitalWrite(12,0);
-digitalWrite(13,0);
+	desativar();
 
-//Pinos ativos: 2,7,10,11
-digitalWrite(2,1);
-digitalWrite(7,1);
-digitalWrite(10,1);
-digitalWrite(11,1);
-delay(intervalo);
+	//Pinos 2, 3, 10, 13
+	digitalWrite(2, 1);
+	digitalWrite(3, 1);
+	digitalWrite(10, 1);
+	digitalWrite(13, 1);
+	delay(intervalo);
 
-//Pinos ativos: 7, 6, 11, 12
-digitalWrite(2,0);
-digitalWrite(6,1);
-digitalWrite(10,0);
-digitalWrite(12,1);
-delay(intervalo);
+	//Pinos 3, 6, 13, 12
+	digitalWrite(2, 0);
+	digitalWrite(6, 1);
+	digitalWrite(10, 0);
+	digitalWrite(12, 1);
+	delay(intervalo);
 
-//Pinos ativos: 6, 3, 12, 13
-digitalWrite(7,0);
-digitalWrite(3,1);
-digitalWrite(11,0);
-digitalWrite(13,1);
-delay(intervalo);
+	//Pinos 6, 7, 12, 11
+	digitalWrite(3, 0);
+	digitalWrite(7, 1);
+	digitalWrite(13, 0);
+	digitalWrite(11, 1);
+	delay(intervalo);
 
-//Pinos ativos: 3, 2, 13, 10
-digitalWrite(6,0);
-digitalWrite(2,1);
-digitalWrite(12,0);
-digitalWrite(10,1);
-delay(intervalo);
-
-
+	//Pinos 7, 2, 11, 10
+	digitalWrite(6, 0);
+	digitalWrite(2, 1);
+	digitalWrite(12, 0);
+	digitalWrite(10, 1);
+	delay(intervalo);
 }
 
-void tras(int intervalo)
+
+/**
+ * @brief Define os pinos de modo a mover o carro para tras
+ * 
+ * @param intervalo Valor definido para o delay de transição para a nova configuração de 
+ * energização das bobinas
+ */
+void tras(int intervalo) 
 {
-digitalWrite(2,0);
-digitalWrite(3,0);
-digitalWrite(6,0);
-digitalWrite(7,0);
-digitalWrite(10,0);
-digitalWrite(11,0);
-digitalWrite(12,0);
-digitalWrite(13,0);
+	desativar();
 
-//Pinos 2, 3, 10, 13
-digitalWrite(2,1);
-digitalWrite(3,1);
-digitalWrite(10,1);
-digitalWrite(13,1);
-delay(intervalo);
+	//Pinos ativos: 2, 7, 10, 11
+	digitalWrite(2, 1);
+	digitalWrite(7, 1);
+	digitalWrite(10, 1);
+	digitalWrite(11, 1);
+	delay(intervalo);
 
-//Pinos 3, 6, 13, 12
-digitalWrite(2,0);
-digitalWrite(6,1);
-digitalWrite(10,0);
-digitalWrite(12,1);
-delay(intervalo);
+	//Pinos ativos: 7, 6, 11, 12
+	digitalWrite(2, 0);
+	digitalWrite(6, 1);
+	digitalWrite(10, 0);
+	digitalWrite(12, 1);
+	delay(intervalo);
 
-//Pinos 6, 7, 12, 11
-digitalWrite(3,0);
-digitalWrite(7,1);
-digitalWrite(13,0);
-digitalWrite(11,1);
-delay(intervalo);
+	//Pinos ativos: 6, 3, 12, 13
+	digitalWrite(7, 0);
+	digitalWrite(3, 1);
+	digitalWrite(11, 0);
+	digitalWrite(13, 1);
+	delay(intervalo);
 
-//Pinos 7, 2, 11, 10
-digitalWrite(6,0);
-digitalWrite(2,1);
-digitalWrite(12,0);
-digitalWrite(10,1);
-delay(intervalo);
+	//Pinos ativos: 3, 2, 13, 10
+	digitalWrite(6, 0);
+	digitalWrite(2, 1);
+	digitalWrite(12, 0);
+	digitalWrite(10, 1);
+	delay(intervalo);
 }
 
-void virarD(int intervalo)
+
+/**
+ * @brief Define os pinos de modo a mover o carro para a direita.
+ * 
+ * @param intervalo Valor definido para o delay de transição para a nova configuração de 
+ * energização das bobinas
+ */
+void direita(int intervalo) 
 {
+	desativar();
 
-digitalWrite(2,0);
-digitalWrite(3,0);
-digitalWrite(6,0);
-digitalWrite(7,0);
-digitalWrite(10,0);
-digitalWrite(11,0);
-digitalWrite(12,0);
-digitalWrite(13,0);
+	//Pino 10-13
+	digitalWrite(10, 1);
+	digitalWrite(13, 1);
+	delay(intervalo);
 
-//Pino 10 - 13
-digitalWrite(10,1);
-digitalWrite(13,1);
-delay(intervalo);
+	//Pinos 13-12
+	digitalWrite(10, 0);
+	digitalWrite(12, 1);
+	delay(intervalo);
 
-//Pinos 13-12
-digitalWrite(10,0);
-digitalWrite(12,1);
-delay(intervalo);
+	//Pinos 12-11
+	digitalWrite(13, 0);
+	digitalWrite(11, 1);
+	delay(intervalo);
 
-//Pinos 12-11
-digitalWrite(13,0);
-digitalWrite(11,1);
-delay(intervalo);
-
-//Pinos 11-10
-digitalWrite(12,0);
-digitalWrite(10,1);
-delay(intervalo);
-
+	//Pinos 11-10
+	digitalWrite(12, 0);
+	digitalWrite(10, 1);
+	delay(intervalo);
 }
 
-void virarE(int intervalo)
+
+/**
+ * @brief Define os pinos de modo a mover o carro para a esquerda
+ * 
+ * @param intervalo Valor definido para o delay de transição para a nova configuração de 
+ * energização das bobinas
+ */
+void esquerda(int intervalo) 
 {
+	desativar();
 
-digitalWrite(2,0);
-digitalWrite(3,0);
-digitalWrite(6,0);
-digitalWrite(7,0);
-digitalWrite(10,0);
-digitalWrite(11,0);
-digitalWrite(12,0);
-digitalWrite(13,0);
+	//Pinos 2, 3, 10, 13
+	digitalWrite(2, 1);
+	digitalWrite(3, 1);
+	delay(intervalo);
 
-//Pinos 2, 3, 10, 13
-digitalWrite(2,1);
-digitalWrite(3,1);
-delay(intervalo);
+	//Pinos 3, 6, 13, 12
+	digitalWrite(2, 0);
+	digitalWrite(6, 1);
+	delay(intervalo);
 
-//Pinos 3, 6, 13, 12
-digitalWrite(2,0);
-digitalWrite(6,1);
-delay(intervalo);
+	//Pinos 6, 7, 12, 11
+	digitalWrite(3, 0);
+	digitalWrite(7, 1);
+	delay(intervalo);
 
-//Pinos 6, 7, 12, 11
-digitalWrite(3,0);
-digitalWrite(7,1);
-delay(intervalo);
-
-//Pinos 7, 2, 11, 10
-digitalWrite(6,0);
-digitalWrite(2,1);
-delay(intervalo);
-
+	//Pinos 7, 2, 11, 10
+	digitalWrite(6, 0);
+	digitalWrite(2, 1);
+	delay(intervalo);
 }
+
+
+/**
+ * @brief Configura os pinos como output
+ */
+void setup() 
+{
+	// Roda direita - pinos 2, 3, 6 e 7
+	pinMode(2, 0);
+	pinMode(17, 0);
+	pinMode(3, 0);
+	pinMode(6, 0);
+	pinMode(7, 0);
+
+	// Roda esquerda - pinos 10, 11, 12 e 13
+	pinMode(10, 0);
+	pinMode(11, 0);
+	pinMode(12, 0);
+	pinMode(13, 0);
+	pinMode(18, 0);
+	pinMode(14, 0);
+}
+
 
 /* Private user code ---------------------------------------------------------*/
 int main(void)
@@ -321,97 +353,61 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  //Inicia o ponteiro com um endereço de memória que será
-  //alterado pela transmissão UART
+  /*
+  	Inicia o ponteiro com um endereço de memória que será
+  	alterado pela transmissão UART
+  */
   char valor;
-  char comando[]="b";
+  char comando[] = "b";
   unsigned char *p2;
-  p2=&comando;
+  p2 = &comando;
   int bitlido;
   int precisao;
 
-  //Configurando os pinos - output
-  //roda direita - pinos 2, 3, 6 e 7
-  pinMode(2,0);
-  pinMode(17,0);
-  pinMode(3,0);
-  pinMode(6,0);
-  pinMode(7,0);
-  //roda esquerda - pinos 10, 11, 12 e 13
-  pinMode(10,0);
-  pinMode(11,0);
-  pinMode(12,0);
-  pinMode(13,0);
-  pinMode(18,0);
-  pinMode(14,0);
+  setup();
 
-precisao=25;
+  precisao = 25;
+
   while (1)
   {
 	  HAL_UART_Receive(&huart1, p2, 1, 10);
 	  valor = *p2;
-	  if (valor=='1')
-	  {
 
-		  //frente(5);
-		  tras(5);
-		 // for (int i=0;i<=precisao;i++)
-		  //{
-			 //rodaD(5);
-		//	  frente(1);
-		 // }
-	  }
-	  if (valor=='2')
+	  if (valor == '1') 
 	  {
-		 // for (int i=0;i<=precisao;i++)
-			//	  {
-					 //rodaD(5);
-					  virarD(5);
-				//  }
-	  }
-	  if (valor=='3')
-	  {
-		  //for (int i=0;i<=precisao;i++)
-				  //{
-					 //rodaD(5);
-					  frente(5);
-				  //}
-	  }
-	  if (valor=='4')
-	  {
-		 // for (int i=0;i<=precisao;i++)
-			//	  {
-					 //rodaD(5);
-					  virarE(5);
-				  //}
-	  }
-	  if (valor=='5')
-	  {
-			digitalWrite(2,0);
-			digitalWrite(3,0);
-			digitalWrite(6,0);
-			digitalWrite(7,0);
-		    digitalWrite(10,0);
-			digitalWrite(11,0);
-			digitalWrite(12,0);
-			digitalWrite(13,0);
-			digitalWrite(18,0);
-	  }
-	  if (valor=='6')
-	  {
-		  digitalWrite(18,1);
-		  delay(500);
-		  digitalWrite(18,0);
+		frente(5);
 	  }
 
-	  //if (*p2=='1')
-	  //{
-	//	  HAL_UART_Transmit ( &huart1, p2, 1, HAL_MAX_DELAY);
-	//  }
-	//  HAL_UART_Transmit (&huart1, p2, 1, HAL_MAX_DELAY);
+	  if (valor == '2') 
+	  {
+		direita(5);
+	  }
+
+	  if (valor == '3') 
+	  {
+		tras(5);
+	  }
+
+	  if (valor == '4') 
+	  {
+		esquerda(5);
+	  }
+
+	  if (valor == '5')
+	  {
+		desativar();
+		digitalWrite(18, 0);
+	  }
+
+	  if (valor=='6') 
+	  {
+		digitalWrite(18, 1);
+		delay(500);
+		digitalWrite(18, 0);
+	  }
   }
-
 }
+
 
 /**
   * @brief System Clock Configuration
