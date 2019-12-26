@@ -1,5 +1,5 @@
 # Carro Remoto
-Carro movido a partir de motores de passo controlados por comandos remotos via Bluetooth por meio do microcontrolador ARM Cortex-M0 (STM32F030F4P6). 
+Carro controlado por comandos remotos via Bluetooth por meio do microcontrolador ARM Cortex-M0 (STM32F030F4P6) e utilizando dois motores de passo de 12V. 
 
 # Integrantes
 Luís Eduardo Pompeu de Sousa Brasil Háteras - 378772 \
@@ -8,7 +8,7 @@ Manoel Rubem Amorim - 375272 \
 Rômulo Gomes dos Santos - 413383
 
 # Funcionalidade
-Como o nome já deixa claro, o projeto consiste na implementação prática de um carro em que seus movimentos, tais como ir para a frente, virar e retroceder, serão controlados remotamente a partir de um aplicativo de celular (Bluetooth SPP) por meio de comandos via Bluetooth. Para isso, será utilizado o módulo HC-06 que receberá os comandos e se comunicará via UART ao microcontrolador ARM Cortex-M0, o qual energizará as bobinas na ordem adequada a fim de movimentar o eixo dos motores de passo utilizados. \
+O projeto consiste na implementação prática de um carro em que seus movimentos, tais como ir para a frente, virar e retroceder, serão controlados remotamente a partir de um aplicativo de celular (Bluetooth SPP) por meio de comandos via Bluetooth. Para isso, será utilizado o módulo HC-06 que receberá os comandos e se comunicará via UART ao microcontrolador ARM Cortex-M0, o qual energizará as bobinas na ordem adequada a fim de movimentar o eixo dos motores de passo utilizados. \
 \
 Para o controle da velocidade, será ajustado um tempo de *delay* entre os acionamentos de cada bobina do motor, respeitando o limite do mesmo. Para nossa aplicação, a precisão dos movimentos é mais importante e por isso o interesse na utilização dos motores de passo uma vez que para velocidades maiores seria mais oportuno a utilização de motores DC. \
 \
@@ -33,22 +33,23 @@ A1,B1, A2, B2, \A1, \B1, \A2, \B2 consistem nas entradas para a sequência de en
 # Lógica
 **Ir para frente**\
 Ambas as rodas devem girar em sentidos opostos:\
-Roda Direita: ANTI-HORÁRIO\
-Roda Esquerda: HORÁRIO\
-\
-Para isso, considerando a energização das bobinas por passo pleno, deve-se energizar na seguinte ordem:\
-![image](https://user-images.githubusercontent.com/56649205/67430929-a22b1c80-f5b9-11e9-957c-3aa91bd2f138.png)
-\
-\
-**Ré**\
-Ambas as rodas devem girar em sentidos opostos:\
 Roda Direita: HORÁRIO\
 Roda Esquerda: ANTI-HORÁRIO\
 \
-Para isso, basta utilizar a sequência do motor 2 no motor 1 e vice-versa. \
+**Ré**\
+Inverso de 'Ir para frente':\
+Roda Direita: ANTI-HORÁRIO\
+Roda Esquerda: HORÁRIO\
 \
 **Virar à direita**\
-Ambas as rodas obedecem a mesma lógica de ir para frente o que muda é que a roda direita terá sua velocidade reduzida. Para isso, aumenta-se o intervalo entre as energizações das bobinas deste motor de passo sendo um três vezes o intervalo da outra. \
+Trava roda direita e mantém roda esquerda girando . 
 \
 **Virar à esquerda**\
-Ambas as rodas obedecem a mesma lógica de ir para frente o que muda é que a roda esquerda terá sua velocidade reduzida. Para isso, aumenta-se o intervalo entre as energizações das bobinas deste motor de passo analogamente ao outro sentido.
+Trava roda esquerda e mantém roda direita girando. 
+\
+
+# Montagem e Testes \
+[![Seguidor de Linha STM32 - 1](https://img.youtube.com/vi/PYC14cG-f94/0.jpg)](https://www.youtube.com/watch?v=PYC14cG-f94)
+\
+[![Seguidor de Linha STM32 - 2](https://img.youtube.com/vi/lV8cyVYBDkQ/0.jpg)](https://www.youtube.com/watch?v=lV8cyVYBDkQ)
+
