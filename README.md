@@ -48,7 +48,6 @@ Trava roda direita e mantém roda esquerda girando .
 **Virar à esquerda**\
 Trava roda esquerda e mantém roda direita girando. 
 \
-\
 # Montagem e Testes
 [![Seguidor de Linha STM32 - 1](https://img.youtube.com/vi/PYC14cG-f94/0.jpg)](https://www.youtube.com/watch?v=PYC14cG-f94)
 \
