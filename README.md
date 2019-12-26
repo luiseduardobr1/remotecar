@@ -44,12 +44,14 @@ Roda Esquerda: HORÁRIO\
 **Virar à direita**\
 Trava roda direita e mantém roda esquerda girando . 
 \
+\
 **Virar à esquerda**\
 Trava roda esquerda e mantém roda direita girando. 
 \
-
-# Montagem e Testes \
+\
+# Montagem e Testes
 [![Seguidor de Linha STM32 - 1](https://img.youtube.com/vi/PYC14cG-f94/0.jpg)](https://www.youtube.com/watch?v=PYC14cG-f94)
+\
 \
 [![Seguidor de Linha STM32 - 2](https://img.youtube.com/vi/lV8cyVYBDkQ/0.jpg)](https://www.youtube.com/watch?v=lV8cyVYBDkQ)
 
