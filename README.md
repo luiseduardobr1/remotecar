@@ -1,5 +1,5 @@
 # Carro Remoto
-Carro controlado por comandos remotos via Bluetooth por meio do microcontrolador ARM Cortex-M0 (STM32F030F4P6) e utilizando dois motores de passo de 12V. 
+Carro controlado por comandos remotos via Bluetooth por meio do microcontrolador ARM Cortex-M0 (STM32F030F4P6) e utilizando dois motores de passo de 12V para movimentar as rodas. 
 
 # Integrantes
 Luís Eduardo Pompeu de Sousa Brasil Háteras - 378772 \
